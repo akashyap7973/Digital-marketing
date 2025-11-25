@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Workshop — Landing Page</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-1: #5b21b6; /* purple */
+      --bg-2: #0ea5e9; /* blue */
+      --glass-bg: rgba(255,255,255,0.06);
+      --card-bg: rgba(255,255,255,0.04);
+      --accent: linear-gradient(135deg,var(--bg-1),var(--bg-2));
+      --radius: 14px;
+      --max-width: 1100px;
+      --text: #e6eef9;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins,system-ui,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background: radial-gradient(600px 400px at 10% 10%, rgba(91,33,182,0.12), transparent), radial-gradient(600px 400px at 90% 90%, rgba(14,165,233,0.08), transparent), #071029;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:24px}
+
+    /* NAVBAR */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(7,16,41,0.6), rgba(7,16,41,0.45));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px}
+    .logo{font-weight:700;letter-spacing:0.2px}
+    .logo span{background:var(--accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--text);text-decoration:none;font-weight:500;opacity:0.95}
+    .cta{padding:8px 14px;border-radius:10px;background:var(--accent);box-shadow:0 6px 20px rgba(14,165,233,0.12);cursor:pointer}
+    .mobile-toggle{display:none;border:0;background:transparent;color:var(--text)}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:56px 0}
+    .hero .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));font-size:13px}
+    .hero h1{font-size:36px;margin:12px 0 12px}
+    .hero p{color:rgba(230,238,249,0.85);margin-bottom:18px}
+    .hero .actions{display:flex;gap:12px;align-items:center}
+    .btn-primary{padding:12px 18px;border-radius:12px;background:var(--accent);border:0;font-weight:600;cursor:pointer}
+    .btn-outline{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:transparent;cursor:pointer}
+
+    /* HERO VISUAL / CARD */
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:18px;padding:20px;box-shadow:0 12px 40px rgba(2,6,23,0.6);align-self:stretch}
+
+    /* SECTIONS */
+    section{padding:48px 0}
+    h2{font-size:22px;margin-bottom:16px}
+    .grid{display:grid;gap:18px}
+
+    /* Cards list */
+    .cards{grid-template-columns:repeat(4,1fr)}
+    .card{background:var(--card-bg);padding:18px;border-radius:12px;backdrop-filter:blur(6px);transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(7,22,55,0.6)}
+    .card .icon{height:48px;width:48px;border-radius:10px;display:inline-grid;place-items:center;margin-bottom:12px}
+    .card h3{margin:0 0 8px}
+
+    /* Conductor / Mentor */
+    .mentor{display:flex;gap:18px;align-items:center}
+    .mentor .photo{width:140px;height:140px;border-radius:14px;overflow:hidden;flex-shrink:0;border:2px solid rgba(255,255,255,0.04)}
+    .mentor img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Benefits */
+    .benefits{grid-template-columns:repeat(4,1fr)}
+
+    /* Form */
+    .form-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px}
+    form{display:grid;gap:10px}
+    input,select{padding:12px;border-radius:10px;border:0;background:rgba(255,255,255,0.03);color:var(--text)}
+    input::placeholder{color:rgba(230,238,249,0.5)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);margin-top:20px}
+
+    /* responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr 360px}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .benefits{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:780px){
+      .nav{padding:10px}
+      nav ul{display:none}
+      .mobile-toggle{display:block}
+      .hero{grid-template-columns:1fr;}
+      .hero-card{order:2}
+      .mentor{flex-direction:column;align-items:flex-start}
+      .cards{grid-template-columns:1fr}
+      .benefits{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+    }
+
+    /* small micro-interactions */
+    a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="logo"><span>AI</span> Workshop</div>
+
+      <nav>
+        <button class="mobile-toggle" id="menuToggle">☰</button>
+        <ul id="navList">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#benefits">Benefits</a></li>
+          <li><a href="#mentor">Mentor</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <button class="btn-outline" id="previewSyllabus">Syllabus</button>
+        <button class="cta btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Register Now</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div>
+        <span class="eyebrow">Upcoming • Live • Limited Seats</span>
+        <h1>Join Our AI Workshop &amp; Upgrade Your Future</h1>
+        <p>Learn practical AI skills, build real projects, and master prompt engineering — designed for working professionals and students who want to level up.</p>
+        <div class="actions">
+          <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Register Now</button>
+          <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More</button>
+        </div>
+
+        <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
+          <div style="padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:10px">📅 2-day Intensive</div>
+          <div style="padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:10px">⏱ 4hrs/day</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="flex:1">
+            <h3 style="margin:0">Workshop Snapshot</h3>
+            <p style="margin:8px 0 12px;color:rgba(230,238,249,0.8)">Hands-on sessions, real-world examples, and a mentor-led project you can showcase on your portfolio.</p>
+            <ul style="margin:0;padding-left:18px;line-height:1.6;color:rgba(230,238,249,0.85)">
+              <li>Live demos & guided labs</li>
+              <li>Downloadable resources</li>
+              <li>Certificate & community access</li>
+            </ul>
+          </div>
+
+          <div style="width:120px;text-align:center">
+            <div style="font-size:12px;color:rgba(230,238,249,0.7)">Seats left</div>
+            <div style="font-size:28px;font-weight:700;margin-top:6px">18</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT CONDUCTOR -->
+    <section id="about">
+      <h2>About the Workshop Conductor</h2>
+      <div class="mentor">
+        <div class="photo">
+          <!-- using uploaded image path -->
+          <img src="https://i.pinimg.com/736x/22/5f/4c/225f4c968155fcd81cc89182f673583b.jpg" alt="Workshop Conductor">
+        </div>
+        <div>
+          <h3>Dr. Arjun Verma</h3>
+          <p style="margin-top:6px;color:rgba(230,238,249,0.85)">A passionate AI researcher and practitioner with 10+ years of experience building ML systems for industry and education. Specializes in applied ML, prompt engineering, and deploying production-ready AI pipelines.</p>
+          <p style="margin-top:12px">Specialties: <strong>Natural Language Processing</strong>, <strong>Prompt Engineering</strong>, <strong>AI Productization</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT YOU WILL LEARN -->
+    <section>
+      <h2>What You Will Learn</h2>
+      <div class="grid cards" style="grid-template-columns:repeat(4,1fr)">
+
+        <div class="card">
+          <div class="icon" style="background:linear-gradient(135deg,#6d28d9,#06b6d4);color:white">🤖</div>
+          <h3>AI Basics</h3>
+          <p>Understand AI fundamentals, model types, and how to reason about data and performance.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);color:white">💬</div>
+          <h3>Prompt Engineering</h3>
+          <p>Learn techniques to craft reliable prompts, evaluate outputs, and optimize for cost and quality.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" style="background:linear-gradient(135deg,#9333ea,#06b6d4);color:white">⚙️</div>
+          <h3>Automation Tools</h3>
+          <p>Integrate AI into workflows using automation platforms and APIs for real-world tasks.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" style="background:linear-gradient(135deg,#a78bfa,#06b6d4);color:white">🧩</div>
+          <h3>Real-world Projects</h3>
+          <p>Build a mini-project, from idea to deployment, to showcase your skills to employers or clients.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section id="benefits">
+      <h2>Benefits</h2>
+      <div class="grid benefits" style="grid-template-columns:repeat(4,1fr)">
+        <div class="card"><div class="icon">🎓</div><h3>Certificate</h3><p>Receive a completion certificate to validate your learning.</p></div>
+        <div class="card"><div class="icon">🧪</div><h3>Hands-on</h3><p>Practical labs and real datasets to practice on.</p></div>
+        <div class="card"><div class="icon">👨‍🏫</div><h3>Expert Mentorship</h3><p>Direct guidance from experienced instructors.</p></div>
+        <div class="card"><div class="icon">🤝</div><h3>Community</h3><p>Join an active alumni Slack/Discord for ongoing support.</p></div>
+      </div>
+    </section>
+
+    <!-- MENTOR DETAILED -->
+    <section id="mentor">
+      <h2>About Our Mentor</h2>
+      <div class="mentor" style="align-items:flex-start">
+        <div class="photo">
+          <img src="https://i.pinimg.com/736x/22/5f/4c/225f4c968155fcd81cc89182f673583b.jpg" alt="Mentor">
+        </div>
+        <div>
+          <h3>Arjun Verma — Senior AI Mentor</h3>
+          <p style="color:rgba(230,238,249,0.85)">Arjun has worked across startups and large enterprises to design ML systems. He focuses on making AI practical and accessible: explaining concepts clearly and mentoring students through complete projects.</p>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <a href="#" aria-label="LinkedIn" style="color:var(--text);text-decoration:none">LinkedIn</a>
+            <a href="#" aria-label="Twitter" style="color:var(--text);text-decoration:none">Twitter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / REGISTRATION FORM -->
+    <section id="contact">
+      <h2>Register Now</h2>
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start">
+
+        <div>
+          <p style="color:rgba(230,238,249,0.85)">Fill the form and we will share detailed syllabus, pricing, and next batch dates. Payment link and certificate details will be shared after registration.</p>
+
+          <div style="margin-top:18px;display:grid;gap:12px">
+            <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.02)">
+              <strong>Start Date</strong>
+              <div style="margin-top:6px;color:rgba(230,238,249,0.8)">12th January 2026</div>
+            </div>
+
+            <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.02)">
+              <strong>Duration</strong>
+              <div style="margin-top:6px;color:rgba(230,238,249,0.8)">2 days • 4 hours/day</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="regForm">
+            <input type="text" id="fullName" name="fullName" placeholder="Full name" required />
+            <input type="email" id="email" name="email" placeholder="Email" required />
+            <input type="tel" id="phone" name="phone" placeholder="Phone number" />
+            <select id="level" name="level" required>
+              <option value="">Experience level</option>
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+            <div style="display:flex;gap:8px">
+              <button type="submit" class="btn-primary" style="flex:1">Submit Registration</button>
+              <button type="button" class="btn-outline" onclick="document.getElementById('regForm').reset()">Reset</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>© <strong>AI Workshop</strong> 2025. All rights reserved.</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#mentor">Mentor</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    menuToggle && menuToggle.addEventListener('click', ()=>{
+      if(navList.style.display === 'flex') navList.style.display = 'none';
+      else navList.style.display = 'flex';
+      navList.style.flexDirection = 'column';
+      navList.style.background = 'rgba(7,16,41,0.6)';
+      navList.style.position = 'absolute';
+      navList.style.right = '24px';
+      navList.style.top = '64px';
+      navList.style.padding = '12px';
+      navList.style.borderRadius = '10px';
+    });
+
+    // form handling - demo only
+    document.getElementById('regForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const level = document.getElementById('level').value;
+      if(!name || !email || !level){
+        alert('Please complete required fields.');
+        return;
+      }
+      // Here you would normally send data to your backend
+      alert('Thanks ' + name + '! Registration received. We will contact you at ' + email + '.');
+      this.reset();
+    });
+
+    // smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(link=>{
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      });
+    });
+  </script>
+</body>
+</html>
