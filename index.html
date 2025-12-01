@@ -1,629 +1,345 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Marketing Courses - Master Your Skills</title>
-    
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Workshop — Landing Page</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+  <style>
+    :root{
+      --bg-1: #5b21b6; /* purple */
+      --bg-2: #0ea5e9; /* blue */
+      --glass-bg: rgba(255,255,255,0.06);
+      --card-bg: rgba(255,255,255,0.04);
+      --accent: linear-gradient(135deg,var(--bg-1),var(--bg-2));
+      --radius: 14px;
+      --max-width: 1100px;
+      --text: #e6eef9;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins,system-ui,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background: radial-gradient(600px 400px at 10% 10%, rgba(91,33,182,0.12), transparent), radial-gradient(600px 400px at 90% 90%, rgba(14,165,233,0.08), transparent), #071029;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
+    .container{max-width:var(--max-width);margin:0 auto;padding:24px}
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -5%;
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
+    /* NAVBAR */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(7,16,41,0.6), rgba(7,16,41,0.45));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px}
+    .logo{font-weight:700;letter-spacing:0.2px}
+    .logo span{background:var(--accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--text);text-decoration:none;font-weight:500;opacity:0.95}
+    .cta{padding:8px 14px;border-radius:10px;background:var(--accent);box-shadow:0 6px 20px rgba(14,165,233,0.12);cursor:pointer}
+    .mobile-toggle{display:none;border:0;background:transparent;color:var(--text)}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
-        }
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:56px 0}
+    .hero .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));font-size:13px}
+    .hero h1{font-size:36px;margin:12px 0 12px}
+    .hero p{color:rgba(230,238,249,0.85);margin-bottom:18px}
+    .hero .actions{display:flex;gap:12px;align-items:center}
+    .btn-primary{padding:12px 18px;border-radius:12px;background:var(--accent);border:0;font-weight:600;cursor:pointer}
+    .btn-outline{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:transparent;cursor:pointer}
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    /* HERO VISUAL / CARD */
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:18px;padding:20px;box-shadow:0 12px 40px rgba(2,6,23,0.6);align-self:stretch}
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            animation: fadeInUp 1s ease;
-        }
+    /* SECTIONS */
+    section{padding:48px 0}
+    h2{font-size:22px;margin-bottom:16px}
+    .grid{display:grid;gap:18px}
 
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            opacity: 0.95;
-            animation: fadeInUp 1s ease 0.2s backwards;
-        }
+    /* Cards list */
+    .cards{grid-template-columns:repeat(4,1fr)}
+    .card{background:var(--card-bg);padding:18px;border-radius:12px;backdrop-filter:blur(6px);transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(7,22,55,0.6)}
+    .card .icon{height:48px;width:48px;border-radius:10px;display:inline-grid;place-items:center;margin-bottom:12px}
+    .card h3{margin:0 0 8px}
 
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.4s backwards;
-        }
+    /* Conductor / Mentor */
+    .mentor{display:flex;gap:18px;align-items:center}
+    .mentor .photo{width:140px;height:140px;border-radius:14px;overflow:hidden;flex-shrink:0;border:2px solid rgba(255,255,255,0.04)}
+    .mentor img{width:100%;height:100%;object-fit:cover;display:block}
 
-        .btn {
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 600;
-        }
+    /* Benefits */
+    .benefits{grid-template-columns:repeat(4,1fr)}
 
-        .btn-primary {
-            background: white;
-            color: #667eea;
-        }
+    /* Form */
+    .form-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px}
+    form{display:grid;gap:10px}
+    input,select{padding:12px;border-radius:10px;border:0;background:rgba(255,255,255,0.03);color:var(--text)}
+    input::placeholder{color:rgba(230,238,249,0.5)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
+    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);margin-top:20px}
 
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
+    /* responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr 360px}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .benefits{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:780px){
+      .nav{padding:10px}
+      nav ul{display:none}
+      .mobile-toggle{display:block}
+      .hero{grid-template-columns:1fr;}
+      .hero-card{order:2}
+      .mentor{flex-direction:column;align-items:flex-start}
+      .cards{grid-template-columns:1fr}
+      .benefits{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+    }
 
-        .btn-secondary:hover {
-            background: white;
-            color: #667eea;
-            transform: translateY(-3px);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #2d3748;
-            font-weight: 700;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #718096;
-            margin-bottom: 60px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Courses Section */
-        .courses {
-            background: #f7fafc;
-        }
-
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .course-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .course-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .course-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .course-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-
-        .course-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #2d3748;
-        }
-
-        .course-card p {
-            color: #718096;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-
-        .btn-learn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-learn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Why Choose Us */
-        .why-choose {
-            background: white;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .feature:hover .feature-icon {
-            transform: rotate(360deg) scale(1.1);
-        }
-
-        .feature h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #2d3748;
-        }
-
-        .feature p {
-            color: #718096;
-        }
-
-        /* Form Section */
-        .form-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 80px 20px;
-        }
-
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .form-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #2d3748;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #4a5568;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Footer */
-        .footer {
-            background: #2d3748;
-            color: white;
-            padding: 50px 20px 20px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #cbd5e0;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .footer-section a:hover {
-            color: #667eea;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: #667eea;
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .form-container {
-                padding: 30px 20px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-    </style>
+    /* small micro-interactions */
+    a:hover{text-decoration:underline}
+  </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Master Digital Marketing & Transform Your jobs</h1>
-            <p>Learn from industry experts with hands-on training, real projects, and guaranteed job assistance. Get certified and stand out in the digital world.</p>
-            <div class="cta-buttons">
-                <button class="btn btn-primary">Enroll Now</button>
-                <button class="btn btn-secondary">Download Syllabus</button>
-            </div>
+
+  <header>
+    <div class="container nav">
+      <div class="logo"><span>AI</span> Workshop</div>
+
+      <nav>
+        <button class="mobile-toggle" id="menuToggle">☰</button>
+        <ul id="navList">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#benefits">Benefits</a></li>
+          <li><a href="#mentor">Mentor</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <button class="btn-outline" id="previewSyllabus">Syllabus</button>
+        <button class="cta btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Register Now</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div>
+        <span class="eyebrow">Upcoming • Live • Limited Seats</span>
+        <h1>Join Our AI Workshop &amp; Upgrade Your Future</h1>
+        <p>Learn practical AI skills, build real projects, and master prompt engineering — designed for working professionals and students who want to level up.</p>
+        <div class="actions">
+          <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Register Now</button>
+          <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More</button>
         </div>
+
+        <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
+          <div style="padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:10px">📅 2-day Intensive</div>
+          <div style="padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:10px">⏱ 4hrs/day</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="flex:1">
+            <h3 style="margin:0">Workshop Snapshot</h3>
+            <p style="margin:8px 0 12px;color:rgba(230,238,249,0.8)">Hands-on sessions, real-world examples, and a mentor-led project you can showcase on your portfolio.</p>
+            <ul style="margin:0;padding-left:18px;line-height:1.6;color:rgba(230,238,249,0.85)">
+              <li>Live demos & guided labs</li>
+              <li>Downloadable resources</li>
+              <li>Certificate & community access</li>
+            </ul>
+          </div>
+
+          <div style="width:120px;text-align:center">
+            <div style="font-size:12px;color:rgba(230,238,249,0.7)">Seats left</div>
+            <div style="font-size:28px;font-weight:700;margin-top:6px">18</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Courses Section -->
-    <section class="courses">
-        <div class="container">
-            <h2 class="section-title">Our Featured Courses</h2>
-            <p class="section-subtitle">Choose from our comprehensive digital marketing programs designed to make you job-ready</p>
-            
-            <div class="courses-grid">
-                <div class="course-card">
-                    <div class="course-icon">🔍</div>
-                    <h3>SEO Mastery</h3>
-                    <p>Learn advanced SEO techniques, keyword research, on-page and off-page optimization to rank websites on Google's first page.</p>
-                    <button class="btn-learn">Learn More</button>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-icon">📢</div>
-                    <h3>Google Ads & PPC</h3>
-                    <p>Master paid advertising strategies, campaign management, and ROI optimization across Google Ads and other platforms.</p>
-                    <button class="btn-learn">Learn More</button>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-icon">📱</div>
-                    <h3>Social Media Marketing</h3>
-                    <p>Create engaging content and run successful campaigns on Facebook, Instagram, LinkedIn, and Twitter to grow your brand.</p>
-                    <button class="btn-learn">Learn More</button>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-icon">✉️</div>
-                    <h3>Email Marketing</h3>
-                    <p>Build effective email campaigns, automation sequences, and list-building strategies that convert subscribers into customers.</p>
-                    <button class="btn-learn">Learn More</button>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-icon">📊</div>
-                    <h3>Analytics & Data</h3>
-                    <p>Master Google Analytics, data interpretation, and conversion tracking to make data-driven marketing decisions.</p>
-                    <button class="btn-learn">Learn More</button>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-icon">🎨</div>
-                    <h3>Content Marketing</h3>
-                    <p>Learn content strategy, copywriting, storytelling, and distribution techniques to attract and engage your audience.</p>
-                    <button class="btn-learn">Learn More</button>
-                </div>
-            </div>
+    <!-- ABOUT CONDUCTOR -->
+    <section id="about">
+      <h2>About the Workshop mentor</h2>
+      <div class="mentor">
+        <div class="photo">
+          <!-- using uploaded image path -->
+          <img src="https://i.pinimg.com/736x/22/5f/4c/225f4c968155fcd81cc89182f673583b.jpg" alt="Workshop Conductor">
         </div>
+        <div>
+          <h3>Dr. Arjun Verma</h3>
+          <p style="margin-top:6px;color:rgba(230,238,249,0.85)">A passionate AI researcher and practitioner with 10+ years of experience building ML systems for industry and education. Specializes in applied ML, prompt engineering, and deploying production-ready AI pipelines.</p>
+          <p style="margin-top:12px">Specialties: <strong>Natural Language Processing</strong>, <strong>Prompt Engineering</strong>, <strong>AI Productization</strong></p>
+        </div>
+      </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="why-choose">
-        <div class="container">
-            <h2 class="section-title">Why Choose Us?</h2>
-            <p class="section-subtitle">We provide everything you need to succeed in your digital marketing career</p>
-            
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">👨‍🏫</div>
-                    <h3>Industry Experts</h3>
-                    <p>Learn from professionals with 10+ years of real-world experience</p>
-                </div>
+    <!-- WHAT YOU WILL LEARN -->
+    <section>
+      <h2>What You Will Learn</h2>
+      <div class="grid cards" style="grid-template-columns:repeat(4,1fr)">
 
-                <div class="feature">
-                    <div class="feature-icon">💼</div>
-                    <h3>Practical Training</h3>
-                    <p>Work on live projects and build a portfolio that gets you hired</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">🎯</div>
-                    <h3>100% Job Assistance</h3>
-                    <p>Dedicated placement support and career guidance until you land your dream job</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Certification</h3>
-                    <p>Receive industry-recognized certificates to boost your credibility</p>
-                </div>
-            </div>
+        <div class="card">
+          <div class="icon" style="background:linear-gradient(135deg,#6d28d9,#06b6d4);color:white">🤖</div>
+          <h3>AI Basics</h3>
+          <p>Understand AI fundamentals, model types, and how to reason about data and performance.</p>
         </div>
+
+        <div class="card">
+          <div class="icon" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);color:white">💬</div>
+          <h3>Prompt Engineering</h3>
+          <p>Learn techniques to craft reliable prompts, evaluate outputs, and optimize for cost and quality.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" style="background:linear-gradient(135deg,#9333ea,#06b6d4);color:white">⚙️</div>
+          <h3>Automation Tools</h3>
+          <p>Integrate AI into workflows using automation platforms and APIs for real-world tasks.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" style="background:linear-gradient(135deg,#a78bfa,#06b6d4);color:white">🧩</div>
+          <h3>Real-world Projects</h3>
+          <p>Build a mini-project, from idea to deployment, to showcase your skills to employers or clients.</p>
+        </div>
+
+      </div>
     </section>
 
-    <!-- Form Section -->
-    <section class="form-section">
-        <div class="form-container">
-            <h2 class="form-title">Start Your Learning Journey</h2>
-            <form id="leadForm">
-                <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210">
-                </div>
-
-                <div class="form-group">
-                    <label for="course">Course Interested In *</label>
-                    <select id="course" name="course" required>
-                        <option value="">Select a course</option>
-                        <option value="seo">SEO Mastery</option>
-                        <option value="google-ads">Google Ads & PPC</option>
-                        <option value="social-media">Social Media Marketing</option>
-                        <option value="email">Email Marketing</option>
-                        <option value="analytics">Analytics & Data</option>
-                        <option value="content">Content Marketing</option>
-                        <option value="all">Complete Digital Marketing</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-submit">Get Started Now</button>
-            </form>
-        </div>
+    <!-- BENEFITS -->
+    <section id="benefits">
+      <h2>Benefits</h2>
+      <div class="grid benefits" style="grid-template-columns:repeat(4,1fr)">
+        <div class="card"><div class="icon">🎓</div><h3>Certificate</h3><p>Receive a completion certificate to validate your learning.</p></div>
+        <div class="card"><div class="icon">🧪</div><h3>Hands-on</h3><p>Practical labs and real datasets to practice on.</p></div>
+        <div class="card"><div class="icon">👨‍🏫</div><h3>Expert Mentorship</h3><p>Direct guidance from experienced instructors.</p></div>
+        <div class="card"><div class="icon">🤝</div><h3>Community</h3><p>Join an active alumni Slack/Discord for ongoing support.</p></div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>📧 info@digitalmarketingcourses.com</p>
-                <p>📞 +91 98765 43210</p>
-                <p>📍 123 Business Center, Mumbai, India</p>
+    <!-- MENTOR DETAILED -->
+    <section id="mentor">
+      <h2>About Our Mentor</h2>
+      <div class="mentor" style="align-items:flex-start">
+        <div class="photo">
+          <img src="https://i.pinimg.com/736x/22/5f/4c/225f4c968155fcd81cc89182f673583b.jpg" alt="Mentor">
+        </div>
+        <div>
+          <h3>Arjun Verma — Senior AI Mentor</h3>
+          <p style="color:rgba(230,238,249,0.85)">Arjun has worked across startups and large enterprises to design ML systems. He focuses on making AI practical and accessible: explaining concepts clearly and mentoring students through complete projects.</p>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <a href="#" aria-label="LinkedIn" style="color:var(--text);text-decoration:none">LinkedIn</a>
+            <a href="#" aria-label="Twitter" style="color:var(--text);text-decoration:none">Twitter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / REGISTRATION FORM -->
+    <section id="contact">
+      <h2>Register Now</h2>
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start">
+
+        <div>
+          <p style="color:rgba(230,238,249,0.85)">Fill the form and we will share detailed syllabus, pricing, and next batch dates. Payment link and certificate details will be shared after registration.</p>
+
+          <div style="margin-top:18px;display:grid;gap:12px">
+            <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.02)">
+              <strong>Start Date</strong>
+              <div style="margin-top:6px;color:rgba(230,238,249,0.8)">12th January 2026</div>
             </div>
 
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="#">About Us</a>
-                <a href="#">All Courses</a>
-                <a href="#">Student Reviews</a>
-                <a href="#">Blog</a>
+            <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.02)">
+              <strong>Duration</strong>
+              <div style="margin-top:6px;color:rgba(230,238,249,0.8)">2 days • 4 hours/day</div>
             </div>
-
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <p>Stay connected on social media</p>
-                <div class="social-links">
-                    <a href="#" class="social-link">📘</a>
-                    <a href="#" class="social-link">📸</a>
-                    <a href="#" class="social-link">🐦</a>
-                    <a href="#" class="social-link">💼</a>
-                </div>
-            </div>
+          </div>
         </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2025 Digital Marketing Courses. All rights reserved. | Privacy Policy | Terms & Conditions</p>
+        <div class="form-card">
+          <form id="regForm">
+            <input type="text" id="fullName" name="fullName" placeholder="Full name" required />
+            <input type="email" id="email" name="email" placeholder="Email" required />
+            <input type="tel" id="phone" name="phone" placeholder="Phone number" />
+            <select id="level" name="level" required>
+              <option value="">Experience level</option>
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+            <div style="display:flex;gap:8px">
+              <button type="submit" class="btn-primary" style="flex:1">Submit Registration</button>
+              <button type="button" class="btn-outline" onclick="document.getElementById('regForm').reset()">Reset</button>
+            </div>
+          </form>
         </div>
-    </footer>
 
-    <script>
-        document.getElementById('leadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your interest! We will contact you shortly.');
-            this.reset();
-        });
-    </script>
+      </div>
+    </section>
 
-    
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>© <strong>AI Workshop</strong> 2025. All rights reserved.</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#mentor">Mentor</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    menuToggle && menuToggle.addEventListener('click', ()=>{
+      if(navList.style.display === 'flex') navList.style.display = 'none';
+      else navList.style.display = 'flex';
+      navList.style.flexDirection = 'column';
+      navList.style.background = 'rgba(7,16,41,0.6)';
+      navList.style.position = 'absolute';
+      navList.style.right = '24px';
+      navList.style.top = '64px';
+      navList.style.padding = '12px';
+      navList.style.borderRadius = '10px';
+    });
+
+    // form handling - demo only
+    document.getElementById('regForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const level = document.getElementById('level').value;
+      if(!name || !email || !level){
+        alert('Please complete required fields.');
+        return;
+      }
+      // Here you would normally send data to your backend
+      alert('Thanks ' + name + '! Registration received. We will contact you at ' + email + '.');
+      this.reset();
+    });
+
+    // smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(link=>{
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      });
+    });
+  </script>
 </body>
 </html>
